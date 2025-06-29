@@ -11,6 +11,7 @@ router.post('/', async (req, res)=> {
         const { keyword } = req.body;
         const result = await Search.search(keyword);
         if(req.session.userId){
+            console.log(req.session.userId);
             const user = await User.findById(req.session.userId)
             user.searchHistory.push(keyword);
             await user.save();
