@@ -37,6 +37,8 @@ function Profile(){
             {user ? (
               <>
                 <Text><b>Kullanıcı Adı:</b> {user.username}</Text><br />
+                <Text><b>email:</b> {user.email} </Text><br />
+                <Text><b>Önceki aramalar:</b> {user.searchHistory.join(", ")} </Text><br />
               </>
             ) : (
               <Text>Profil bilgisi bulunamadı.</Text>

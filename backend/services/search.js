@@ -62,8 +62,8 @@ export default class Search{
             };
             result.push(job);
         });
-        page.close();
-        browser.close();
+        await page.close();
+        await browser.close();
 
         return result;
 
