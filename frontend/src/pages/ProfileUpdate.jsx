@@ -15,7 +15,7 @@ const ProfileUpdate = () => {
     }
   
     try {
-      const response = await axios.put('http://localhost:3000/profile/update', 
+      const response = await axios.put('https://freelanceweb-scv9.onrender.com/:3000/profile/update', 
         { cleanedValues },
         { withCredentials: true });
       console.log(response)

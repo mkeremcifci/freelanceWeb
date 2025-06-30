@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 function Private({ children }){
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     useEffect(() => {
-        axios.get("http://localhost:3000/profile", {
+        axios.get("https://freelanceweb-scv9.onrender.com/:3000/profile", {
             withCredentials: true
         })
         .then(() => setIsAuthenticated(true))

@@ -8,7 +8,7 @@ const { Title, Text } = Typography;
 function Register() {
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("http://localhost:3000/auth/register", {
+      const response = await axios.post("https://freelanceweb-scv9.onrender.com/:3000/auth/register", {
         username: values.username,
         email: values.email,
         password: values.password,
