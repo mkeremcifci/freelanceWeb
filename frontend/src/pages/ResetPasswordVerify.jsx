@@ -22,7 +22,7 @@ function ResetPasswordVerify(){
         }  
 
         try{
-            const response = await axios.post('https://freelanceweb-scv9.onrender.com/:3000/auth/verify-reset-password', {
+            const response = await axios.post('https://freelanceweb-scv9.onrender.com:3000/auth/verify-reset-password', {
                 id,
                 token,
                 newPassword: password,
