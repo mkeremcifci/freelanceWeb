@@ -13,7 +13,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors({
-    origin: "https://freelance-m09xnpipg-cifcimustafakerem-gmailcoms-projects.vercel.app",
+    origin: "https://freelance-idnk867tn-cifcimustafakerem-gmailcoms-projects.vercel.app",
     credentials: true
 }));
 
