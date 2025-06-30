@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
         const result = await Auth.login(username, password);
 
         req.session.userId = result.id;
-
+        console.log("Giriş başarılı");
         res.status(200).json(result.message);
     }
     catch(error){
