@@ -13,7 +13,7 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("https://freelanceweb-scv9.onrender.com//profile", {
+        const response = await axios.get("https://freelanceweb-scv9.onrender.com:3000/profile", {
           withCredentials: true,
         });
 
