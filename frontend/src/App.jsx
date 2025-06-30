@@ -9,6 +9,7 @@ import Private from './pages/Private'
 import SearchResults from './pages/SearchResults'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPasswordVerify from './pages/ResetPasswordVerify'
+import ProfileUpdate from './pages/ProfileUpdate'
 
 
 function App() {
@@ -20,6 +21,11 @@ function App() {
           <Route path='/profile' element={
             <Private>
               <Profile /> 
+            </Private>
+            } />
+          <Route path='/update-profile' element={
+            <Private>
+              <ProfileUpdate />
             </Private>
             } />
           <Route path='/login' element={<Login />} />
