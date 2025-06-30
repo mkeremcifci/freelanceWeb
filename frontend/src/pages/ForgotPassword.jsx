@@ -9,7 +9,7 @@ const { Title, Text } = Typography;
 function ForgotPassword() {
   const onFinish = async (values) => {
     try {
-      const response = await axios.post("https://freelanceweb-scv9.onrender.com:3000/auth/reset-password", {
+      const response = await axios.post("https://freelanceweb-scv9.onrender.com/auth/reset-password", {
         email: values.email,
       });
 

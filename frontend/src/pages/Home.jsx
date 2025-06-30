@@ -15,7 +15,7 @@ function Home() {
   async function handleClick(keyword) {
     setLoading(true);
     try {
-      const response = await axios.post("https://freelanceweb-scv9.onrender.com:3000/search", 
+      const response = await axios.post("https://freelanceweb-scv9.onrender.com/search", 
         { keyword },
         { withCredentials:true }
       );
