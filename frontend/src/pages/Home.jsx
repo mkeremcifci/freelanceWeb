@@ -1,32 +1,40 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Input, Typography, Card, Form, Space, Spin } from "antd";
+import { Button, Input, Typography, Card, Form, Spin } from "antd";
 import axios from "axios";
 
 const { Title, Text } = Typography;
 
 function Home() {
   const [keywordValue, setKeywordValue] = useState("");
-  const [loading, setLoading] = useState(false)
-
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
   const navigate = useNavigate();
 
   async function handleClick(keyword) {
     setLoading(true);
+    setFeedback("");
+
     try {
-      const response = await axios.post("http://localhost:3000/search", 
+      const response = await axios.post(
+        "http://localhost:3000/search",
         { keyword },
-        { withCredentials:true }
+        { withCredentials: true }
       );
 
       const { data } = response.data;
-      navigate("/results", {state:{Keyword:keyword, Results:data}});
-    } 
-    catch (error) {
+
+      if (!data || data.length === 0) {
+        setFeedback("Aradığınız kriterlere uygun sonuç bulunamadı.");
+        return;
+      }
+
+      navigate("/results", { state: { Keyword: keyword, Results: data } });
+    } catch (error) {
       console.error(error);
-    }
-    finally{
+      setFeedback("Arama sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+    } finally {
       setLoading(false);
     }
   }
@@ -51,9 +59,25 @@ function Home() {
       >
         <div style={{ textAlign: "center", marginBottom: 24 }}>
           <Title level={3}>Arama Yap</Title>
-          <Text type="secondary">Bir anahtar kelime girerek arama yapabilirsiniz.</Text>
+          <Text type="secondary">
+            Bir anahtar kelime girerek arama yapabilirsiniz.
+          </Text>
         </div>
-        <Spin spinning={loading} tip="Yükleniyor.." size='large'>
+
+        <Spin spinning={loading} tip="Yükleniyor..." size="large">
+          {feedback && (
+            <div
+              style={{
+                marginBottom: 16,
+                color: "red",
+                textAlign: "center",
+                fontWeight: "500",
+              }}
+            >
+              {feedback}
+            </div>
+          )}
+
           <Form onFinish={() => handleClick(keywordValue)} layout="vertical">
             <Form.Item
               label="Anahtar Kelime"
@@ -70,7 +94,15 @@ function Home() {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" block size="large" style={{ borderRadius: 6 }} loading={loading} disabled={loading}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                size="large"
+                style={{ borderRadius: 6 }}
+                loading={loading}
+                disabled={loading}
+              >
                 Ara
               </Button>
             </Form.Item>

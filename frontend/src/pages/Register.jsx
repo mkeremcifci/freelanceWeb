@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Form, Input, Button, Card } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -6,16 +6,24 @@ import axios from "axios";
 const { Title, Text } = Typography;
 
 function Register() {
+  const [feedback, setFeedback] = useState({ text: "", type: "" });
+
   const onFinish = async (values) => {
+    setFeedback({ text: "", type: "" });
+
     try {
       const response = await axios.post("http://localhost:3000/auth/register", {
         username: values.username,
         email: values.email,
         password: values.password,
       });
+
       const { message } = response.data;
-      console.log(message);
+      setFeedback({ text: message || "Kayıt başarılı!", type: "success" });
     } catch (error) {
+      const errorMsg =
+        error.response?.data?.message || "Kayıt başarısız. Lütfen tekrar deneyin.";
+      setFeedback({ text: errorMsg, type: "error" });
       console.error(error);
     }
   };
@@ -40,12 +48,29 @@ function Register() {
       }}
     >
       <Card
-        style={{ width: 400, borderRadius: 12, boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
+        style={{
+          width: 400,
+          borderRadius: 12,
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+        }}
       >
         <div style={{ textAlign: "center", marginBottom: 24 }}>
           <Title level={3}>Kayıt Ol</Title>
           <Text type="secondary">Yeni bir hesap oluşturun.</Text>
         </div>
+
+        {feedback.text && (
+          <div
+            style={{
+              marginBottom: 16,
+              color: feedback.type === "error" ? "red" : "green",
+              textAlign: "center",
+              fontWeight: "500",
+            }}
+          >
+            {feedback.text}
+          </div>
+        )}
 
         <Form
           name="register_form"
@@ -91,7 +116,10 @@ function Register() {
               validatePasswordConfirm,
             ]}
           >
-            <Input.Password prefix={<LockOutlined />} placeholder="Şifreyi tekrar girin" />
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="Şifreyi tekrar girin"
+            />
           </Form.Item>
 
           <Form.Item>

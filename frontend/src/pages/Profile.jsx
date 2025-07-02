@@ -8,7 +8,7 @@ const { Title, Text } = Typography;
 function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Yönlendirme için hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
