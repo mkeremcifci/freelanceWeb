@@ -43,7 +43,7 @@ function Home() {
     <div
       style={{
         height: "100vh",
-        background: "linear-gradient(to right, #FFDEE9, #B5FFFC)",
+        background: "linear-gradient(to right, #74ebd5, #ACB6E5)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
