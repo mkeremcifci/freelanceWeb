@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Card, Typography, Spin, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
@@ -16,10 +16,10 @@ function Profile() {
         const response = await axios.get("http://localhost:3000/profile", {
           withCredentials: true,
         });
-
         setUser(response.data.data);
       } catch (error) {
         console.error(error);
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -28,23 +28,74 @@ function Profile() {
     fetchProfile();
   }, []);
 
-  if (loading) return <Spin fullscreen />;
+  if (loading)
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "linear-gradient(to right, #74ebd5, #ACB6E5)",
+          zIndex: 9999,
+        }}
+      >
+        <Spin tip="Yükleniyor..." size="large" />
+      </div>
+    );
 
   return (
-    <div style={{ padding: 24, display: "flex", justifyContent: "center" }}>
-      <Card style={{ width: 400 }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(to right, #74ebd5, #ACB6E5)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 24,
+      }}
+    >
+      <Card
+        style={{
+          width: 400,
+          borderRadius: 12,
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+          padding: 24,
+          textAlign: "center",
+        }}
+      >
         <Title level={3}>Profil</Title>
+
         {user ? (
           <>
-            <Text><b>Kullanıcı Adı:</b> {user.username}</Text><br />
-            <Text><b>email:</b> {user.email}</Text><br />
-            <Text><b>Önceki aramalar:</b> {user.searchHistory.join(", ")}</Text><br /><br />
-            <Button type="primary" onClick={() => navigate('/update-profile')}>
+            <Text strong>Kullanıcı Adı:</Text> <Text>{user.username}</Text>
+            <br />
+            <Text strong>E-posta:</Text> <Text>{user.email}</Text>
+            <br />
+            <Text strong>Önceki Aramalar:</Text>
+            <br />
+            <Text type="secondary" style={{ wordBreak: "break-word" }}>
+              {user.searchHistory && user.searchHistory.length > 0
+                ? user.searchHistory.join(", ")
+                : "Henüz arama yapılmadı."}
+            </Text>
+
+            <Button
+              type="primary"
+              block
+              size="large"
+              style={{ marginTop: 24, borderRadius: 6 }}
+              onClick={() => navigate("/update-profile")}
+            >
               Profili Güncelle
             </Button>
           </>
         ) : (
-          <Text>Profil bilgisi bulunamadı.</Text>
+          <Text type="danger">Profil bilgisi bulunamadı.</Text>
         )}
       </Card>
     </div>
