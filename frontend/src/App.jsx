@@ -10,6 +10,7 @@ import SearchResults from './pages/SearchResults'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPasswordVerify from './pages/ResetPasswordVerify'
 import ProfileUpdate from './pages/ProfileUpdate'
+import SelectProfessions from './pages/SelectProfessions'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             </Private>
             } />
           <Route path='/login' element={<Login />} />
+          <Route path='/select-professions' element={<SelectProfessions />} />
           <Route path='/register' element={<Register />} />
           <Route path='/results' element={<SearchResults />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />

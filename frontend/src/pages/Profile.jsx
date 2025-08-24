@@ -93,6 +93,16 @@ function Profile() {
             >
               Profili Güncelle
             </Button>
+
+            <Button
+              type="default"
+              block
+              size="large"
+              style={{ marginTop: 12, borderRadius: 6 }}
+              onClick={() => navigate("/select-professions")}
+            >
+              Bildirim Almak İstediğim Meslekleri Seç
+            </Button>
           </>
         ) : (
           <Text type="danger">Profil bilgisi bulunamadı.</Text>
